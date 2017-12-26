@@ -16,13 +16,16 @@ public class LeftPannel extends JPanel{
 
 	public JSplitPane split_pane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	
-	public LeftPannel(){
+	public LeftPannel(int size_x,int size_y){
 		super();
-		ItemPannel ip = new ItemPannel();
+		ItemPannel ip = new ItemPannel(size_x, size_y-150);
 		ip.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 		split_pane.setTopComponent(ip);
+		split_pane.setDividerLocation(size_y-150);
 		split_pane.setBottomComponent(new FiltersPannel());
-		this.add(split_pane);
+		this.add(split_pane,BorderLayout.CENTER);
+		this.setSize(size_x,size_y);
 	}
 	
 }

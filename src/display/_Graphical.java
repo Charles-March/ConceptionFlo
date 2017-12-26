@@ -11,6 +11,8 @@ public interface _Graphical {
 	 * 
 	 * @param item_list representing all the items available during the mapping
 	 */
+	
+	
 	void init(List<Item> item_list);
 	
 }

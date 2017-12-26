@@ -18,8 +18,14 @@ public final class Main {
 	public static final String frame_Name = "Prototype 1";
 	public static final int pic_size=32;
 	
+	
+	public static int selected = 0;
+	
 	public static List<Item> item_list;
 	public static ItemOnMap[][] grille;
+	
+	public static int toController=0;
+	public static int fromController=0;
 	
 	
 	public static void main(String[] argc){
@@ -27,8 +33,7 @@ public final class Main {
 		init_grille();
 		item_list = Item.all_items();
 		disp.init(item_list);
-		
-			
+		grille[1][1]=new ItemOnMap(item_list.get(0));
 	}
 	
 	private static void init_grille(){
