@@ -1,0 +1,8 @@
+<item>
+	<id>00</id>
+	<image>Circle_In.png</image>
+	<inCount>1</inCount>
+	<outCount>1</outCount>
+	<toController>0</toController>
+	<fromController>1</fromController>
+</item>

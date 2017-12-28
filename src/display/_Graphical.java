@@ -15,4 +15,11 @@ public interface _Graphical {
 	
 	void init(List<Item> item_list);
 	
+	
+	/**
+	 * This function repaint the map and should call the component who's in charge of the map to repaint it self
+	 * 
+	 */
+	void repaintGrid();
+	
 }

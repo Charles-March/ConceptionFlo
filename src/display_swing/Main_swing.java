@@ -9,6 +9,8 @@ public class Main_swing implements _Graphical{
 
 	static MainWindow mw;
 	static boolean display_grille=false;
+	static boolean display_names=false;
+	static boolean display_conectors=false;
 	
 	@Override
 	public void init(List<Item> item_list) {
@@ -16,7 +18,20 @@ public class Main_swing implements _Graphical{
 		mw.setVisible(true);
 	}
 	
+	public static void on_display_names_changed(){
+		mw.split_pane.getRightComponent().repaint();
+	}
+	
 	public static void on_display_grille_changed(){
+		mw.split_pane.getRightComponent().repaint();
+	}
+	
+	public static void on_display_connectors_changed(){
+		mw.split_pane.getRightComponent().repaint();
+	}
+
+	@Override
+	public void repaintGrid() {
 		mw.split_pane.getRightComponent().repaint();
 	}
 

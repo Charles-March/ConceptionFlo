@@ -77,12 +77,16 @@ public class ItemPannel extends JPanel{
 			int pos_x = 20 +(i%maxX) * Main.pic_size;
 			int pos_y = 20 + (i/maxX) * Main.pic_size;
 			g.drawImage(image_list.get(i), pos_x, pos_y, Main.pic_size, Main.pic_size, null, null);
-			if(i==pos){
-				g.setColor(new Color(255, 0, 0));
-				Main.selected=i;
-				g.drawRect(pos_x, pos_y, Main.pic_size, Main.pic_size);
-			}
 		}
+		
+		if(pos!=-1){
+			int pos_x = 20 +(pos%maxX) * Main.pic_size;
+			int pos_y = 20 + (pos/maxX) * Main.pic_size;
+			g.setColor(new Color(255, 0, 0));
+			Main.selected=pos;
+			g.drawRect(pos_x, pos_y, Main.pic_size, Main.pic_size);
+		}
+		
 		
 		
 	}

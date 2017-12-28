@@ -1,8 +1,10 @@
 package main;
 
+import items.Connection;
 import items.Item;
 import items.ItemOnMap;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import display._Graphical;
@@ -19,27 +21,31 @@ public final class Main {
 	public static final int pic_size=32;
 	
 	
-	public static int selected = 0;
+	public static int selected = -1;
 	
 	public static List<Item> item_list;
 	public static ItemOnMap[][] grille;
 	
 	public static int toController=0;
+	public static List<ItemOnMap> to_pc_list = new LinkedList<ItemOnMap>(); 
 	public static int fromController=0;
 	
+	public static List<Connection> connection_list = new LinkedList<Connection>();
+	public static _Graphical disp = new Main_swing();
 	
 	public static void main(String[] argc){
-		_Graphical disp = new Main_swing();
 		init_grille();
 		item_list = Item.all_items();
 		disp.init(item_list);
-		grille[1][1]=new ItemOnMap(item_list.get(0));
 	}
 	
 	private static void init_grille(){
 		grille = new ItemOnMap[grilleX][];
 		for(int i=0;i<grilleX;i++){
 			grille[i]=new ItemOnMap[grilleY];
+			for(int j=0;j<grilleY;j++){
+				grille[i][j]=null;
+			}
 		}
 	}
 	
