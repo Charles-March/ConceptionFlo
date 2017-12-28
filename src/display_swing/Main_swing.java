@@ -29,6 +29,10 @@ public class Main_swing implements _Graphical{
 	public static void on_display_connectors_changed(){
 		mw.split_pane.getRightComponent().repaint();
 	}
+	
+	public static void on_name_changed(){
+		mw.split_pane.getRightComponent().repaint();
+	}
 
 	@Override
 	public void repaintGrid() {

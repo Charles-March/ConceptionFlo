@@ -101,7 +101,7 @@ public class GrillePannel extends JPanel{
 				/*
 				 * CHANGER LE NOM
 				 */
-				
+				new ChangeNameDialog(pos_x, pos_y);
 			}
 			
 		}

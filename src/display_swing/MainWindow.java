@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
@@ -68,6 +69,10 @@ public class MainWindow extends JFrame{
 					
 				}
 			});
+	}
+	
+	public void newNameValidation(String name){
+		
 	}
 
 }

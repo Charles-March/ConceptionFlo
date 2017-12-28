@@ -8,6 +8,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import main.Main;
 
@@ -37,11 +39,20 @@ public class ConfigurationWindow extends JFrame{
 			this.add(listScroller);
 			ChoixList.setVisible(true);
 			this.setVisible(true);
+			
+			ChoixList.addListSelectionListener(new ListSelectionListener() {
+				
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					int indexChoosed = e.getFirstIndex();
+					
+				}
+			});
 		}
 	}
 	
 	public ConfigurationWindow(Configuration c){
-		super("Coucou");
+		super("Configuration de noeud");
 		this.setLayout(new BorderLayout());
 		this.add(new pannelConfigs(),BorderLayout.CENTER);
 		this.setSize(new Dimension(275, 300));
