@@ -11,13 +11,16 @@ public class ItemOnMap {
 	public int refId;
 	public List<Integer> toControllerid=new LinkedList<Integer>();
 	public List<Integer> fromControllerid=new LinkedList<Integer>();
-	public ItemOnMap next;
-	public Configuration config;
+	public Configuration config = null;
 	public String name;
 	
 	
 	public Image getImage(){
 		return Main.item_list.get(refId).getImage();
+	}
+	
+	private ItemOnMap(){
+		
 	}
 	
 	public ItemOnMap(Item i){
@@ -30,10 +33,6 @@ public class ItemOnMap {
 				Main.toController++;
 				toControllerid.add(new Integer(Integer.valueOf(Main.toController)));
 			}
-			
-		}
-		else{
-			
 		}
 		
 		if(i.fromController>0){
@@ -42,11 +41,33 @@ public class ItemOnMap {
 				Main.fromController++;
 				fromControllerid.add(new Integer(Main.fromController));
 			}
-		}
-		else{
 			
+			config=new Configuration();
 		}
 		
+	}
+	
+	public ItemOnMap clone(){
+		ItemOnMap i = new ItemOnMap();
+		i.refId=refId;
+		
+		i.fromControllerid = new LinkedList<Integer>();
+		for(int j=0;j<fromControllerid.size();j++){
+			i.fromControllerid.add(fromControllerid.get(j));
+		}
+		
+		i.name=name;
+		i.config = new Configuration(config);
+		
+		if(toControllerid.size()>0){
+			i.toControllerid = new LinkedList<Integer>();
+			for(int j=0;j<toControllerid.size();j++){
+				i.toControllerid.add(toControllerid.get(j));
+			}
+			
+			Main.to_pc_list.set(Main.to_pc_list.indexOf(this), i);
+		}
+		return i;
 	}
 	
 	public static boolean toNext(Point from, Point to){
@@ -61,5 +82,15 @@ public class ItemOnMap {
 		}
 		return false;
 		
+	}
+	
+	public void addConfig(int id,boolean state){
+		BooleanEquation be = new BooleanEquation(id, state);
+		for(int i=0;i<config.equation_list.size();i++){
+			if(config.equation_list.get(i).id==id){
+				config.equation_list.remove(i);
+			}
+		}
+		config.addBool(be);
 	}
 }

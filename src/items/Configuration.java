@@ -11,13 +11,21 @@ public class Configuration {
 	}
 	
 	public Configuration(Configuration c){
-		equation_list=c.equation_list;
+		if(c!=null && c.equation_list!=null){
+			equation_list = new LinkedList<BooleanEquation>();
+			for(int i=0;i<c.equation_list.size();i++){
+				equation_list.add(c.equation_list.get(i));
+			}
+		}
 	}
 	
 	public Configuration(){
 		equation_list=new LinkedList<BooleanEquation>();
 	}
 	
+	public void addBool(BooleanEquation be){
+		equation_list.add(be);
+	}
 	
 	
 }

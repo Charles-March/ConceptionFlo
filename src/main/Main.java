@@ -1,6 +1,7 @@
 package main;
 
 import items.Connection;
+import items.Group;
 import items.Item;
 import items.ItemOnMap;
 
@@ -24,6 +25,7 @@ public final class Main {
 	public static int selected = -1;
 	
 	public static List<Item> item_list;
+	public static List<Group> group_list;
 	public static ItemOnMap[][] grille;
 	
 	public static int toController=0;
@@ -36,6 +38,7 @@ public final class Main {
 	public static void main(String[] argc){
 		init_grille();
 		item_list = Item.all_items();
+		group_list= Group.get_all_groups();
 		disp.init(item_list);
 	}
 	

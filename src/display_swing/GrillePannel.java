@@ -21,6 +21,7 @@ public class GrillePannel extends JPanel{
 	 */
 	private static final long serialVersionUID = 6340708146688459670L;
 	private Point clickedOnPosition=null;
+	private Point clickedLeft = null;
 	public GrillePannel(){
 		super();
 		this.addMouseListener(new MouseListener() {
@@ -29,6 +30,9 @@ public class GrillePannel extends JPanel{
 			public void mouseReleased(MouseEvent e) {
 				if(e.getButton()==MouseEvent.BUTTON3){
 					rightClickReleased(e.getPoint());
+				}
+				else if(e.getButton()==MouseEvent.BUTTON1){
+					leftClickReleased(e.getPoint());
 				}
 				
 			}
@@ -67,10 +71,22 @@ public class GrillePannel extends JPanel{
 	public void leftClick(Point position){	
 		int pos_x= position.x/Main.pic_size;
 		int pos_y= position.y/Main.pic_size;
-		
-		if(pos_x>=0 && pos_y>0 && Main.grille[pos_x][pos_y]==null && Main.selected!=-1 && Main.selected<Main.item_list.size()){
+		clickedLeft=new Point(pos_x,pos_y);
+	}
+	
+	public void leftClickReleased(Point position){
+		int pos_x= position.x/Main.pic_size;
+		int pos_y= position.y/Main.pic_size;
+		if(pos_x>=0 && pos_y>0 && Main.grille[pos_x][pos_y]==null && Main.selected!=-1 && Main.selected<Main.item_list.size() && pos_x==clickedLeft.x && pos_y==clickedLeft.y){
 			Main.grille[pos_x][pos_y]=new ItemOnMap(Main.item_list.get(Main.selected));
 			repaint();
+		}
+		else if(pos_x>=0 && pos_y>0 && (pos_x!=clickedLeft.x || pos_y!=clickedLeft.y)){
+			if(Main.grille[clickedLeft.x][clickedLeft.y]!=null && Main.grille[pos_x][pos_y]==null){			
+				Main.grille[pos_x][pos_y]= Main.grille[clickedLeft.x][clickedLeft.y].clone();
+				Main.grille[clickedLeft.x][clickedLeft.y]=null;
+				repaint();
+			}
 		}
 	}
 	
@@ -95,7 +111,7 @@ public class GrillePannel extends JPanel{
 		}
 		else if(clickedOnPosition!= null && pos_x==clickedOnPosition.x && pos_y==clickedOnPosition.y){
 			if(Main.grille[pos_x][pos_y].fromControllerid.size()>0){
-				new ConfigurationWindow(Main.grille[pos_x][pos_y].config);
+				new ConfigurationWindow(pos_x,pos_y);
 			}
 			else if(Main.grille[pos_x][pos_y].toControllerid.size()>0){
 				/*

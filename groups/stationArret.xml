@@ -1,0 +1,23 @@
+<group>
+	<groupname>SA</groupname>
+	<item>
+		<id>00</id>
+		<name>MT</name>
+	</item>
+	<item>
+		<id>00</id>
+		<name>EV</name>
+	</item>
+	<item>
+		<id>00</id>
+		<name>MOUV</name>
+	</item>
+	<item>
+		<id>01</id>
+		<name>PR</name>
+	</item>
+	<item>
+		<id>01</id>
+		<name>PA</name>
+	</item>
+</group>
