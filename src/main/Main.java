@@ -23,7 +23,7 @@ public final class Main {
 	
 	
 	public static int selected = -1;
-	
+	public static int selectedGroup = -1;
 	public static List<Item> item_list;
 	public static List<Group> group_list;
 	public static ItemOnMap[][] grille;

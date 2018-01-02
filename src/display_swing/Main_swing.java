@@ -38,5 +38,8 @@ public class Main_swing implements _Graphical{
 	public void repaintGrid() {
 		mw.split_pane.getRightComponent().repaint();
 	}
-
+	
+	public static void repaintLeft(){
+		mw.split_pane.getLeftComponent().repaint();
+	}
 }

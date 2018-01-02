@@ -9,9 +9,11 @@ import xmlParser.ParserGroup;
 public class Group {
 	public LinkedList<Item_In_Group> item_list;
 	public String name;
+	public String entireName;
 	
-	public Group(String name, LinkedList<Item_In_Group> itemList){
+	public Group(String name,String entireName,LinkedList<Item_In_Group> itemList){
 		this.name=name;
+		this.entireName=entireName;
 		item_list = new LinkedList<Item_In_Group>();
 		for(int i=0;i<itemList.size();i++){
 			Item_In_Group item = itemList.get(i).clone();
@@ -37,6 +39,7 @@ public class Group {
 	
 	private void copy(Group g) {
 		this.name=g.name;
+		this.entireName=g.entireName;
 		item_list = new LinkedList<Item_In_Group>();
 		for(int i=0;i<g.item_list.size();i++){
 			item_list.add(g.item_list.get(i));

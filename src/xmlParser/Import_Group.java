@@ -15,12 +15,14 @@ public class Import_Group extends DefaultHandler {
 	private boolean bitem;
 	private boolean bgroupname;
 	private boolean bgroup;
+	private boolean bentirename;
 	
 	
 	
 	private int id;
 	private String name;
 	
+	public String entireName;
 	public String groupName;
 	public LinkedList<Item_In_Group> item_list = new LinkedList<Item_In_Group>();
 	
@@ -36,6 +38,8 @@ public class Import_Group extends DefaultHandler {
 			bgroupname = true;
 		} else if (qName.equalsIgnoreCase("group")){
 			bgroup = true;
+		} else if(qName.equalsIgnoreCase("groupentirename")){
+			bentirename = true;
 		}
 	}
 	
@@ -60,6 +64,9 @@ public class Import_Group extends DefaultHandler {
 				bgroupname=false;
 			} else if (bgroup){
 				bgroup=false;
+			} else if(bentirename){
+				entireName=lecture;
+				bentirename=false;
 			}
 			
 		}

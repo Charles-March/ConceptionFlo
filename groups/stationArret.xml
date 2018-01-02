@@ -1,5 +1,6 @@
 <group>
 	<groupname>SA</groupname>
+	<groupentirename>Station d'arrêt</groupentirename>
 	<item>
 		<id>00</id>
 		<name>MT</name>

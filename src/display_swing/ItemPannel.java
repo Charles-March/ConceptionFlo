@@ -57,21 +57,33 @@ public class ItemPannel extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				mousePosition=arg0.getPoint();
+				fillMain();
+				Main_swing.repaintLeft();
 				paintComponent(getGraphics());
 			}
 		});
 	}
 	
 	
-	@Override
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		
+	public void fillMain(){
 		int maxX = (this.getWidth()-20) / Main.pic_size;
 		int pos=-1;
 		if(mousePosition!=null){
 			pos = maxX*((mousePosition.y-20)/Main.pic_size) + (mousePosition.x-20)/Main.pic_size;
+			mousePosition=null;
 		}
+		
+		if(pos!=-1){
+			Main.selected=pos;
+			Main.selectedGroup=-1;
+		}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		System.out.println("Paint items");
+		int maxX = (this.getWidth()-20) / Main.pic_size;
 		for(int i=0;i<image_list.size() && maxX>0;i++){
 			
 			int pos_x = 20 +(i%maxX) * Main.pic_size;
@@ -79,11 +91,10 @@ public class ItemPannel extends JPanel{
 			g.drawImage(image_list.get(i), pos_x, pos_y, Main.pic_size, Main.pic_size, null, null);
 		}
 		
-		if(pos!=-1){
-			int pos_x = 20 +(pos%maxX) * Main.pic_size;
-			int pos_y = 20 + (pos/maxX) * Main.pic_size;
+		if(Main.selected!=-1){
+			int pos_x = 20 +(Main.selected%maxX) * Main.pic_size;
+			int pos_y = 20 + (Main.selected/maxX) * Main.pic_size;
 			g.setColor(new Color(255, 0, 0));
-			Main.selected=pos;
 			g.drawRect(pos_x, pos_y, Main.pic_size, Main.pic_size);
 		}
 		

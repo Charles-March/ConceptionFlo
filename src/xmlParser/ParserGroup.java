@@ -21,7 +21,7 @@ public class ParserGroup {
 	        File f=new File(FilePath);
 	        Import_Group imp = new Import_Group();
 			parser.parse(f, imp);
-			return new Group(imp.groupName,imp.item_list);
+			return new Group(imp.groupName,imp.entireName,imp.item_list);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 			return null;
