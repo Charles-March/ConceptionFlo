@@ -1,10 +1,15 @@
 package display_swing;
 
+import items.ItemOnMap;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +20,7 @@ import main.Main;
 public class ChangeNameDialog extends JDialog{
 	private static final long serialVersionUID = 7235832392537131415L;
 	JTextField name_row = new JTextField();
+	JButton delete = new JButton("Supprimer");
 	
 	public ChangeNameDialog(int x,int y){
 		super(Main_swing.mw);
@@ -22,9 +28,44 @@ public class ChangeNameDialog extends JDialog{
 		setTitle("Changement de nom");
 		this.add(new JLabel("Nom : "));
 		this.add(name_row);
+		this.add(delete);
 		this.setSize(new Dimension(250,75));
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
+		delete.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ItemOnMap.deleteItem(x, y);
+				Main_swing.on_display_grille_changed();
+				destroy_dialog();
+			}
+		});
 		
 		name_row.addKeyListener(new KeyListener() {
 			

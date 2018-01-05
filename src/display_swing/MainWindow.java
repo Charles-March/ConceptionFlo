@@ -15,7 +15,7 @@ import main.Main;
 public class MainWindow extends JFrame{
 	
 	private static final long serialVersionUID = 3795702711244761199L;
-
+	
 	JSplitPane split_pane = new JSplitPane();
 	
 	public MainWindow(int sizeX, int sizeY, String title,List<Item> item_list){
@@ -24,7 +24,7 @@ public class MainWindow extends JFrame{
 		addListener();
 		LeftPannel lp = new LeftPannel(Main.frame_X/4,Main.frame_Y);
 		split_pane.setLeftComponent(lp);
-		split_pane.setRightComponent(new GrillePannel());
+		split_pane.setRightComponent(new RightScrollPane());
 		split_pane.setDividerLocation(Main.frame_X/4);
 		lp.setSize(new Dimension(Main.frame_X/4,Main.frame_Y));
 		this.add(split_pane);

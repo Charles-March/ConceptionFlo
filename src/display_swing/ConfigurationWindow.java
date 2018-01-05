@@ -1,5 +1,7 @@
 package display_swing;
 
+import items.ItemOnMap;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
@@ -39,6 +41,7 @@ public class ConfigurationWindow extends JFrame{
 				Iarray[i]=Main.to_pc_list.get(i).name;
 			}
 			JButton change_name = new JButton("Changer le nom");
+			JButton delete = new JButton("Supprimer");
 			ChoixList=new JList<String>(Iarray);
 			ChoixList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 			ChoixList.setLayoutOrientation(JList.VERTICAL);
@@ -48,9 +51,45 @@ public class ConfigurationWindow extends JFrame{
 			this.add(new JLabel("Ensemble des noeuds :"));
 			this.add(listScroller);
 			this.add(change_name);
+			this.add(delete);
 			
 			ChoixList.setVisible(true);
 			this.setVisible(true);
+			
+			delete.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					ItemOnMap.deleteItem(x, y);
+					Main_swing.on_display_grille_changed();
+					closeWindow();
+					
+				}
+			});
 			
 			change_name.addMouseListener(new MouseListener() {
 				
@@ -169,6 +208,15 @@ public class ConfigurationWindow extends JFrame{
 		System.out.println(Main.to_pc_list.get(current_chosing).name + " : "+ Boolean.toString(b));
 		Main.grille[x][y].addConfig(current_chosing, b);
 		config_actuelle.repaint();
+	}
+	
+	public void closeWindow(){
+		config_actuelle.setVisible(false);
+		config_actuelle.setEnabled(false);
+		config_actuelle=null;
+		
+		this.setVisible(false);
+		this.setEnabled(false);
 	}
 	
 	

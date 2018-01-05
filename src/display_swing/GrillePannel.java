@@ -1,9 +1,11 @@
 package display_swing;
 
 import items.Connection;
+import items.Group;
 import items.ItemOnMap;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -24,6 +26,9 @@ public class GrillePannel extends JPanel{
 	private Point clickedLeft = null;
 	public GrillePannel(){
 		super();
+		this.setSize(new Dimension(Main.grilleX*Main.pic_size,Main.grilleY*Main.pic_size));
+		this.setMaximumSize(new Dimension(Main.grilleX*Main.pic_size,Main.grilleY*Main.pic_size));
+		this.setPreferredSize(new Dimension(Main.grilleX*Main.pic_size,Main.grilleY*Main.pic_size));
 		this.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -79,6 +84,10 @@ public class GrillePannel extends JPanel{
 		int pos_y= position.y/Main.pic_size;
 		if(pos_x>=0 && pos_y>0 && Main.grille[pos_x][pos_y]==null && Main.selected!=-1 && Main.selected<Main.item_list.size() && pos_x==clickedLeft.x && pos_y==clickedLeft.y){
 			Main.grille[pos_x][pos_y]=new ItemOnMap(Main.item_list.get(Main.selected));
+			repaint();
+		}
+		else if(pos_x>=0 && pos_y>0 && Main.grille[pos_x][pos_y]==null && Main.selectedGroup!=-1 && Main.selectedGroup<Main.group_list.size() && pos_x==clickedLeft.x && pos_y==clickedLeft.y){
+			Group.putGroup(pos_x, pos_y, Main.selectedGroup);
 			repaint();
 		}
 		else if(pos_x>=0 && pos_y>0 && (pos_x!=clickedLeft.x || pos_y!=clickedLeft.y)){
@@ -165,8 +174,11 @@ public class GrillePannel extends JPanel{
 							g.setColor(new Color(0,0,0));
 						}
 						
+						/*
+						 *  DISPLAYING NAMES
+						 */
 						if(Main_swing.display_names){
-							g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+							g.setFont(new Font(Font.SANS_SERIF, 0, 13));
 							g.drawChars(item.name.toCharArray(), 0, item.name.length(),(int)( pos_x-(Main.pic_size*0.2)), (int)(pos_y + (Main.pic_size * 1.3)));
 						}
 					}
@@ -177,9 +189,7 @@ public class GrillePannel extends JPanel{
 						g.drawRect(pos_x, pos_y, Main.pic_size, Main.pic_size);
 					}
 					
-					/*
-					 *  DISPLAYING NAMES
-					 */
+					
 					
 				}
 			}

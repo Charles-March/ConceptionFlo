@@ -47,6 +47,28 @@ public class ItemOnMap {
 		
 	}
 	
+	public ItemOnMap(Item i, String itemName, String groupName,int groupId) {
+		refId = i.id;
+		
+		if(i.toController>0){
+			Main.to_pc_list.add(this);
+			for(int j=0;j<i.toController;j++){
+				Main.toController++;
+				toControllerid.add(new Integer(Integer.valueOf(Main.toController)));
+			}
+		}
+		
+		if(i.fromController>0){
+			for(int j=0;j<i.fromController;j++){
+				Main.fromController++;
+				fromControllerid.add(new Integer(Main.fromController));
+			}
+			
+			config=new Configuration();
+		}
+		name = groupName+groupId+"."+itemName;
+	}
+
 	public ItemOnMap clone(){
 		ItemOnMap i = new ItemOnMap();
 		i.refId=refId;
@@ -92,5 +114,69 @@ public class ItemOnMap {
 			}
 		}
 		config.addBool(be);
+	}
+	
+	public static void deleteItem(int x,int y){
+		ItemOnMap i = Main.grille[x][y];
+		if(i.toControllerid.size()>0){
+			int controllerId = i.toControllerid.get(0);
+		
+
+			int index = Main.to_pc_list.indexOf(i);
+			for(int k=0;k<Main.grilleX;k++){
+				for(int j=0;j<Main.grilleY;j++){
+					
+					if(Main.grille[k][j]!= null){
+						/*
+						 * ControllerId part
+						 */
+						if(Main.grille[k][j].toControllerid!=null && Main.grille[k][j].toControllerid.size()>0 && Main.grille[k][j].toControllerid.get(0)>controllerId){
+							Main.grille[k][j].toControllerid.set(0, Main.grille[k][j].toControllerid.get(0)-1);
+						}
+						
+						
+						/*
+						 * CONFIG PART
+						 */
+						if(Main.grille[k][j].config!=null){
+							Configuration c = Main.grille[k][j].config;
+							for(int l=0;l<c.equation_list.size();l++){
+								if(c.equation_list.get(l).id==index){
+									c.equation_list.remove(l);
+									l--;
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			Main.to_pc_list.remove(i);
+			Main.toController--;
+		}
+		
+		
+		if(i.fromControllerid.size()>0){
+			int controllerId = i.fromControllerid.get(0);
+			
+			for(int k=0;k<Main.grilleX;k++){
+				for(int j=0;j<Main.grilleY;j++){
+					
+					if(Main.grille[k][j]!= null){
+						/*
+						 * ControllerId part
+						 */
+						if(Main.grille[k][j].fromControllerid!= null && Main.grille[k][j].fromControllerid.size()>0 && Main.grille[k][j].fromControllerid.get(0)>controllerId){
+							Main.grille[k][j].fromControllerid.set(0, Main.grille[k][j].fromControllerid.get(0)-1);
+						}
+					}
+		
+				}
+			}
+			Main.fromController--;
+		}
+		
+		Main.grille[x][y]=null;
+		
 	}
 }

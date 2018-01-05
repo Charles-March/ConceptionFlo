@@ -4,12 +4,14 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.Main;
 import xmlParser.ParserGroup;
 
 public class Group {
 	public LinkedList<Item_In_Group> item_list;
 	public String name;
 	public String entireName;
+	public static List<Integer> groupCount;
 	
 	public Group(String name,String entireName,LinkedList<Item_In_Group> itemList){
 		this.name=name;
@@ -51,12 +53,35 @@ public class Group {
 		
 		File repertoire = new File(System.getProperty("user.dir") + Item.systemSeparator + "groups");
 		File[] files=repertoire.listFiles();
+		groupCount = new LinkedList<Integer>();
 		for(int i=0;i<files.length;i++){
 			if(files[i].isFile() && files[i].getName().endsWith(".xml")){
 				group_list.add(new Group(files[i].getAbsolutePath()));
+				groupCount.add(0);
 			}
 		}
+		
 		return group_list;
+	}
+	
+	public static void putGroup(int x,int y,int groupId){
+		if(Main.group_list.size()<=groupId){
+			System.out.println("Problem in 'putGroup' : groupId >= group_list.size()");
+			return ;
+		}
+		Group g = Main.group_list.get(groupId);
+		
+		for(int i=0;i<g.item_list.size();i++){
+			if(Main.grille[x+(i*2)][y]!=null){
+				return ;
+			}
+		}
+		groupCount.set(groupId, groupCount.get(groupId)+1);
+		for(int i=0;i<g.item_list.size();i++){	
+			Main.grille[x+(i*2)][y]=new ItemOnMap(Main.item_list.get(g.item_list.get(i).id),g.item_list.get(i).name,g.name,groupCount.get(groupId));
+		}
+		
+		
 	}
 	
 }

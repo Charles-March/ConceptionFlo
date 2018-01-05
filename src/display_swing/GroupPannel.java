@@ -17,7 +17,6 @@ import main.Main;
 public class GroupPannel extends JPanel{
 
 	private static final long serialVersionUID = 9145802623507535958L;
-
 	public GroupPannel(){
 		super();
 		addMouseListener(new MouseListener() {
@@ -79,7 +78,6 @@ public class GroupPannel extends JPanel{
 			}
 			if(Main.selectedGroup==i){
 				g.setColor(new Color(150,50,50));
-				System.out.println(gr.item_list.size());
 				g.drawRect(20, 30 + i*(Main.pic_size*2),  ((Main.pic_size*gr.item_list.size())), Main.pic_size);
 			}
 		}
