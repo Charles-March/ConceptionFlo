@@ -152,7 +152,7 @@ public class ConfigurationWindow extends JFrame{
 		this.setVisible(true);
 		
 		
-		config_actuelle = new Frame_Config_Actuelle(Main.grille[x][y]);
+		config_actuelle = new Frame_Config_Actuelle(Main.grille[x][y],this);
 		config_actuelle.setVisible(true);
 		
 		this.addWindowListener(new WindowListener() {
@@ -207,6 +207,10 @@ public class ConfigurationWindow extends JFrame{
 	public void chosen(boolean b){
 		System.out.println(Main.to_pc_list.get(current_chosing).name + " : "+ Boolean.toString(b));
 		Main.grille[x][y].addConfig(current_chosing, b);
+		config_actuelle.repaint();
+	}
+	
+	public void repaint_config(){
 		config_actuelle.repaint();
 	}
 	

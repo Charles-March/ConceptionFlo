@@ -140,10 +140,12 @@ public class ItemOnMap {
 						 */
 						if(Main.grille[k][j].config!=null){
 							Configuration c = Main.grille[k][j].config;
-							for(int l=0;l<c.equation_list.size();l++){
-								if(c.equation_list.get(l).id==index){
-									c.equation_list.remove(l);
-									l--;
+							if(c.equation_list!=null){
+								for(int l=0;l<c.equation_list.size();l++){
+									if(c.equation_list.get(l).id==index){
+										c.equation_list.remove(l);
+										l--;
+									}
 								}
 							}
 						}
